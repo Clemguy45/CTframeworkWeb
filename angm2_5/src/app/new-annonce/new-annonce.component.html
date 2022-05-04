@@ -1,0 +1,46 @@
+
+<div *ngIf="chargement" class="spinner-dual-ring"></div>
+
+<form *ngIf="!chargement" [formGroup]="userForm" (ngSubmit)="submitAnnonce()" novalidate>
+  <div *ngIf="oldAnnonce" class="form-group">
+    <label class="col-form-label">Id: {{id}}</label>
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Nom Produit</label>
+    <input type="text" [(ngModel)]="nom" class="form-control" formControlName="nomProduit">
+    <div *ngIf="getControl.nomProduit.touched && getControl.nomProduit.invalid" class="text-danger">
+      <div *ngIf="getControl.nomProduit.errors.required">Nom du produit est recommandée</div>
+      <div *ngIf="getControl.nomProduit.errors?.minLength">Minimum 3 caractere</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Catégories</label>
+    <select name="categorie" [(ngModel)]="categorie" class="form-control" formControlName="categorie" [attr.disabled]="chargementCat ? 'disabled' : null">
+      <option *ngFor="let c of categories" [value]="c.id" [selected]="c.id == categorie">{{c.nomCategorie}}</option>
+    </select>
+    <div *ngIf="getControl.categorie.touched && getControl.categorie.invalid" class="text-danger">
+      <div *ngIf="getControl.categorie.errors.required">Catégorie est recommandée</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Description</label>
+    <input type="text" [(ngModel)]="description" class="form-control" formControlName="description">
+    <div *ngIf="getControl.description.touched && getControl.description.invalid" class="text-danger">
+      <div *ngIf="getControl.description.errors.required">Description est recommandée</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Prix</label>
+    <input type="number" [(ngModel)]="prix" class="form-control" formControlName="prix">
+    <div *ngIf="getControl.prix.touched && getControl.description.invalid" class="text-danger">
+      <div *ngIf="getControl.prix.errors.required">Prix est recommandée</div>
+      <div *ngIf="getControl.prix.errors?.minLength">Minimum 0 euro</div>
+    </div>
+  </div>
+
+  <div *ngIf="!submitLock">
+    <button *ngIf="!editMode" class="btn btn-primary" type="submit">Ajouter</button>
+    <button *ngIf="editMode" class="btn btn-primary" type="submit">Editer</button>
+  </div>
+  <div *ngIf="submitLock" class="spinner-dual-ring"></div>
+</form>

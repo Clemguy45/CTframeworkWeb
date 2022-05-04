@@ -1,0 +1,21 @@
+
+<div *ngIf="chargement" class="spinner-dual-ring"></div>
+
+<form *ngIf="!chargement" [formGroup]="userForm" (ngSubmit)="submitCategorie()" novalidate>
+  <div *ngIf="oldCategorie" class="form-group">
+    <label class="col-form-label">Id: {{id}}</label>
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Nom Categorie</label>
+    <input type="text" [(ngModel)]="nom" class="form-control" formControlName="nomCategorie">
+    <div *ngIf="getControl.nomCategorie.touched && getControl.nomCategorie.invalid" class="text-danger">
+      <div *ngIf="getControl.nomCategorie.errors.required">Nom du produit est recommandée</div>
+      <div *ngIf="getControl.nomCategorie.errors?.minLength">Minimum 3 caractere</div>
+    </div>
+  </div>
+  <div *ngIf="!submitLock">
+    <button *ngIf="!editMode" class="btn btn-primary" type="submit">Ajouter</button>
+    <button *ngIf="editMode" class="btn btn-primary" type="submit">Editer</button>
+  </div>
+  <div *ngIf="submitLock" class="spinner-dual-ring"></div>
+</form>

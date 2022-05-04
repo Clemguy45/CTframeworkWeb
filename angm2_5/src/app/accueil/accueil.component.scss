@@ -1,0 +1,18 @@
+
+.covid-data {
+    border-radius: 5px;
+    max-width: 100px;
+    margin: auto;
+
+    &.covid-data-ok {background-color: green;}
+    &.covid-data-warning {background-color: orange;}
+    &.covid-data-black {background-color: black;}
+    &.covid-data-grey {background-color: grey;}
+    &.covid-data-blue {background-color: cyan;}
+
+    &.covid-data-ok,
+    &.covid-data-black,
+    &.covid-data-grey {
+        color: white;
+    }
+}

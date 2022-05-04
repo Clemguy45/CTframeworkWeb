@@ -1,0 +1,51 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Bonjour les categories</h1>
+  <h3>Liste des catégories</h3>
+  <div>
+    <a class="p-2 text-dark" routerLinkActive="active" routerLink="/categorie/new"> + Créer une categorie</a>
+  </div>
+
+  <div *ngIf="chargement" class="spinner-dual-ring"></div>
+
+  <div *ngIf="categories.length>0 && !chargement" class="list-card categories">
+    <div *ngFor="let c of categories" class="card">
+      <div class="card-body">
+        <h5 class="card-header mb-2" (click)="categorieFocus=c">{{c.id}} - {{c.nomCategorie}}</h5>
+        <p *ngIf="c.annonces" class="card-text">{{c.annonces.length}} annonce(s)</p>
+        <button class="btn btn-primary" (click)="editCategorie(c.id)">Modifier</button>
+        <button class="btn btn-danger" (click)="deleteCategorie(c.id)" [disabled]="removeMode">Supprimer</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="categories.length == 0 && !chargement">
+    <p>
+      Il n'y a pas de catégories à afficher !
+    </p>
+  </div>
+
+  <div *ngIf="categorieFocus">
+    <h3>{{categorieFocus.nomCategorie}}</h3>
+    <div *ngIf="categorieFocus.annonces && categorieFocus.annonces.length  > 0" class="list-card">
+      <div *ngFor="let c of categorieFocus.annonces" class="card">
+        <div class="card-body">
+          <h5 class="card-header mb-2">{{c.nomProduit}}</h5>
+          <h6 class="cat card-title" *ngIf="c.categorie">{{c.categorie.nomCategorie}}</h6>
+          <p class="card-text">{{c.description}}</p>
+          <h6 class="card-subtitle mb-2 text-muted">{{c.prix}} €</h6>
+          <button class="btn btn-primary" (click)="editAnnonce(c.id)">Modifier</button>
+          <button class="btn btn-danger" (click)="deleteAnnonce(c.id)" [disabled]="removeMode">Supprimer</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="categorieFocus.annonces && categorieFocus.annonces.length == 0">
+      la categorie est vide
+    </div>
+  </div>
+
+  <div *ngIf="erreurMessage" class="text-danger">
+    {{erreurMessage}}
+  </div>
+
+
+</div>

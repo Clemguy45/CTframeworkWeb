@@ -1,0 +1,35 @@
+<div class="pricing-header px-3 py-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Bonjour l'annonce</h1>
+  <h3>Liste des annonces</h3>
+  <div>
+    <a class="p-2 text-dark" routerLinkActive="active" routerLink="/new"> + Créer une annonce</a>
+  </div>
+
+  <div *ngIf="chargement" class="spinner-dual-ring"></div>
+
+  <div *ngIf="annonces.length>0 && !chargement" class="list-card">
+    <div *ngFor="let c of annonces" class="card">
+      <div class="card-body">
+        <h5 class="card-header mb-2">{{c.nomProduit}}</h5>
+        <h6 class="cat card-title" *ngIf="c.categorie">{{c.categorie.nomCategorie}}</h6>
+        <p class="card-text">{{c.description}}</p>
+        <h6 class="card-subtitle mb-2 text-muted">{{c.prix}} €</h6>
+        <button class="btn btn-primary" (click)="editAnnonce(c.id)">Modifier</button>
+        <button class="btn btn-danger" (click)="deleteAnnonce(c.id)" [disabled]="removeMode">Supprimer</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="annonces.length == 0 && !chargement">
+    <p>
+      Liste d'annonce vide
+    </p>
+  </div>
+
+  <div *ngIf="erreurMessage" class="text-danger">
+    {{erreurMessage}}
+  </div>
+
+
+</div>

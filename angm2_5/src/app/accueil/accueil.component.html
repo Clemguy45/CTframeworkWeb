@@ -1,0 +1,58 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Accueil</h1>
+    <h2>Info Covid-19</h2>
+    <div *ngIf="!chargement" class="list-card">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-header mb-2">Nombre d'hospitalisation</h5>
+                <p class="card-text">Nombre de perssone actuellement hospitalisée</p>
+                <div class="covid-data covid-data-warning">{{hospitalises}}</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-header mb-2">Nombre de Réa</h5>
+                <p class="card-text">Nombre de personnes actuellement en réanimation</p>
+                <div class="covid-data covid-data-warning">{{reanimation}}</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-header mb-2">Nombre total de décès</h5>
+                <p class="card-text">Nombre de perssone décédes depuis le début la pandémie</p>
+                <div class="covid-data covid-data-black">{{deces}}</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-header mb-2">Nombre total de gueris</h5>
+                <p class="card-text">Nombre de personnes guéris depuis le début de la pandémie</p>
+                <div class="covid-data covid-data-ok">{{gueris}}</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-header mb-2">Nombre de cas confirmés</h5>
+                <p class="card-text">Nombre de cas confirmés depuis le début de la pandémie</p>
+                <div class="covid-data covid-data-blue">{{nbCas}}</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-header mb-2">Source des données</h5>
+                <p class="card-text">Source des données: <br> {{source}}</p>
+                <div class="covid-data covid-data-grey">{{date}}</div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div *ngIf="chargement" class="spinner-dual-ring"></div>
+
+
+</div>
